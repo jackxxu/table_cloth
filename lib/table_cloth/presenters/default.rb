@@ -48,7 +48,6 @@ module TableCloth
   module Presenters
     class Default
       def render_row_with_secondary(object)
-        binding.pry
         # if there is a secondary, then display first combined row + other secondary-only rows
         if table.secondary && !(secondary_array = object.send(table.secondary)).empty?
           value = wrapper_tag :tr do
