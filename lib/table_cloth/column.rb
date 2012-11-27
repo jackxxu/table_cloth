@@ -11,7 +11,7 @@ module TableCloth
       if options[:proc] && options[:proc].respond_to?(:call)
         view.instance_exec(object, view, &options[:proc])
       else
-        object.send(name)
+        object.is_a?(Hash) ? object[name.to_s] : object.send(name)
       end
     end
 
