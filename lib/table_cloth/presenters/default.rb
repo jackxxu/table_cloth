@@ -53,7 +53,7 @@ module TableCloth
           value = wrapper_tag :tr do
             v.raw table.columns.inject('') {|tds, (key, column)| tds + render_td(column, object.respond_to?(column.name) ? object : secondary_array.first) }
           end
-          ([value] + secondary_array[1..-1]).collect{|row| render_row_without_secondary(row)}.join('')
+          ([value] + secondary_array[1..-1].collect{|row| render_row_without_secondary(row)}].join('')
         else
           render_row_without_secondary(object)
         end
