@@ -43,3 +43,27 @@ module TableCloth
     end
   end
 end
+
+module TableCloth
+  module Presenters
+    class Default
+      def render_row_with_secondary(object)
+        binding.pry
+        # if there is a secondary, then display first combined row + other secondary-only rows
+        if table.secondary && !(secondary_array = object.send(table.secondary)).empty?
+          #value = wrapper_tag :tr do
+          #  v.raw table.columns.inject('') {|tds, (key, column)| tds + render_td(column, object.respond_to?(column.name) ? object : secondary_array.first) }
+          #end 
+          #value + secondary_array[1..-1].collect{|row| render_row_without_secondary(row)}.join('')
+          values = [object] + secondary_array
+          values.collect {|x| render_row_without_secondary(x)}.join('')
+        else
+          render_row_without_secondary(object)
+        end
+      end
+      alias_method_chain :render_row, :secondary
+
+    end
+  end
+end
+

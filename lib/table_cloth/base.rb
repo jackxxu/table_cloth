@@ -27,6 +27,10 @@ module TableCloth
       self.class.has_actions?
     end
 
+    def secondary
+      self.class.secondary
+    end
+
     class << self
       def presenter(klass=nil)
         return @presenter = klass if klass
@@ -70,6 +74,14 @@ module TableCloth
 
       def has_actions?
         columns[:actions].present?
+      end
+
+      def has_secondary(secondary_field_name)
+        @secondary = secondary_field_name.to_sym
+      end
+
+      def secondary
+        @secondary
       end
     end
   end
